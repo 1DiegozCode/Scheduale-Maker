@@ -15,13 +15,17 @@ const taskTypesAdd = {
     home: new Set()
 }
 
+function getTypeTask(taskType) {
+    return taskTypesAdd[taskType]
+}
+
 class Task {
     constructor(taskName, taskType, taskColour) {
         this._taskName = taskName;
-        this._taskTyper = taskTypes[taskType];
+        this._taskType = taskTypes[taskType];
         this._taskColour = taskColours[taskColour];
         taskTypesAdd[taskType].add(this);
     }
 }
 
-export {Task, taskTypesAdd};
+export {Task, taskTypesAdd, getTypeTask};

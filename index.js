@@ -1,7 +1,7 @@
 import { HoursBlocks } from "./src/hours_blocks.js";
 import { Day } from "./src/day.js";
 import { Week } from "./src/week.js"; 
-import { Task, taskTypesAdd } from "./src/task.js"; 
+import { Task, taskTypesAdd, getTypeTask } from "./src/task.js"; 
 
 
 const header = 
