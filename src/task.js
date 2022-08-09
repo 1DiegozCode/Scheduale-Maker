@@ -1,8 +1,3 @@
-const taskTypes = {
-    work: "work",
-    study: "study",
-    home: "home"
-}
 const taskColours = {
     red: "red",
     blue: "blue",
@@ -22,9 +17,9 @@ function getTypeTask(taskType) {
 class Task {
     constructor(taskName, taskType, taskColour) {
         this._taskName = taskName;
-        this._taskType = taskTypes[taskType];
+        this._taskType = taskType;
         this._taskColour = taskColours[taskColour];
-        taskTypesAdd[taskType].add(this);
+        taskTypesAdd[taskType] ? taskTypesAdd[taskType].add(this) : taskTypesAdd[taskType] = new Set().add(this);
     }
 }
 

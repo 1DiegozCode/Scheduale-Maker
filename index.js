@@ -4,64 +4,53 @@ import { Week } from "./src/week.js";
 import { Task, taskTypesAdd, getTypeTask } from "./src/task.js"; 
 
 
+function addTaskTest(week) {
+    const firstMessage = 'Now, enter some tasks'
+    alert(firstMessage)
+    let keepLoging = true
+    while (keepLoging) {
+        const newTaskMessage = 'Lets create a new Task!'
+        alert(newTaskMessage)
+        const newUserTaskName = prompt('Type your task name')
+        const newUserTaskType = prompt('Type your task type')
+        const newUserTaskColor = prompt('Type your task color')
+
+        const addTaskMessage = 'Now add your task the week'
+        alert(addTaskMessage)
+        const taskDay = prompt('Type the task day')
+        const taskBeginningHour = prompt('Type task beginning hour |24 hour format')
+        const taskEndingHour = prompt('Type task ending hour|24 hour format')
+
+        const newUserTask = new Task(newUserTaskName, newUserTaskType, newUserTaskColor)
+        week.scheduleTask(taskDay, newUserTask, taskBeginningHour, taskEndingHour)
+        const userPrompt = prompt('Do you wanna enter a new task? Y|N')
+        keepLoging = userPrompt == 'Y' ? true : false
+    }
+    return 'Succeed'
+}
+
+
+
 const header = 
 `
-
-
 *********************************************
-*--------PROVISIONAL TESTS 24/07/2022-------*
+        Welcome to Easy ScheduleMaker
 *********************************************
-
-
 `
-console.log(header)
-//Provisional Tests
-//hour_blocks.js module
+alert(header)
+const weekTimeBeginning = prompt('Lets create a new week! Type the beginning hour| Use 24 hour format, example: "6:30" or "5:00", only use half hours or whole hours')
+const weekTimeEnding = prompt('Lets create a new week! Type the ending hour| Use 24 hour format, example: "16:30" or "20:00", only use half hours or whole hours')
+const userWeek =  new Week(weekTimeBeginning, weekTimeEnding)
 
-let testBlock = new HoursBlocks("5:30","12:00")
-console.log("\n\nHours Block from 5:30 to 12:00\n\n")
-console.log(testBlock)
+console.log("Creation of the user's week")
+console.log(userWeek)
 
-//day.js module
-let testDay = new Day("SATURDAY", "10:00", "14:30")
-console.log("\n\nDay, Saturday from 10:00 to 14:30\n\n")
-console.log(testDay)
+console.log(addTaskTest(userWeek))
 
-//week.js module
-let testWeek = new Week("6:00", "19:00");
-console.log("\n\nWeek from 6:00 to 19:00\n\n")
-console.log(testWeek)
-
-//task.js module
-let testTask = new Task("This is a Test", "study", "green")
-console.log("\n\nStudy task, color green\n\n")
-console.log(testTask)
-
-/*Checking that when a new instance of task is create, this task is add to the correct 
-type of task set*/
-console.log(taskTypesAdd);
-
-//Adding tasks directly to the block test, modules: task.js, hour_blocks.js
-console.log("\n\nAdding tasks directly to the block test\n\n")
-console.log(testBlock.addTask(testTask, "7:00", "9:30"));
-console.log(testBlock)
-
-//Checking block tasks test, modules: task.js, hour_blocks.js
-console.log("\n\nTasks of testBlock\n\n")
-console.log(testBlock.blockTasks)
-
-//Adding tasks directly to the day test, modules: day.js, hour_blocks.js
-console.log("\n\nAdding tasks directly to the day test\n\n")
-console.log(testDay.addTodayTask(testTask, "13:00", "14:00"))
-console.log(testDay)
-
-//Checking daytasks test, modules: day.js, hour_blocks.js
-console.log("\n\nTasks of testDay\n\n")
-console.log(testDay.todayTasks)
-
-//Adding task directly from the testWeek , modules: week.js, hour_blocks.js
-
-console.log("\n\nAdding tasks directly to the week test\n\n")
-console.log(testWeek.scheduleTask("friday", testTask, "12:00", "13:30"))
-console.log(testWeek)
-
+alert('You end the Easy SheduleMaker pre-alpha test, take a look in your console to see the week')
+console.log('Your week schedule')
+console.log(userWeek)
+console.log('Add Tasks, classified by their types \n')
+console.log(taskTypesAdd)
+console.log('Week Tasks')
+console.log(userWeek.weekTasks)

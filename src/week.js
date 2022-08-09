@@ -13,8 +13,12 @@ class Week {
     }
 
     scheduleTask(day, task, startingTime, endingTime) {
-        const daySelector = `_${day}`;
+        const daySelector = `_${day.toLowerCase()}`;
         return this[daySelector].addTodayTask(task, startingTime, endingTime)
+    }
+
+    get weekTasks() {
+        return Object.keys(this).reduce((weekTaskesArray, weekDay) => weekTaskesArray.concat(this[weekDay].todayTasks), [])
     }
 }
 
