@@ -6,8 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scheduale Maker</title>
 </head>
-<body>
     <h1>Easy Scheduale Maker for Time Boxing</h1>
+    <h2>Add Your Tasks</h2>
+    <form id="NewTaskForm" name="NewTaskForm">
+        <label for="TaskName">Task Name:</label><br>
+        <input type="text" id="TaskName" name="TaskName" placeholder="ADS and Algorithms" required><br>
+        <label for="TaskType">Task Type:</label><br>
+        <input type="text" id="TaskType" name="TaskType" placeholder="Computer Science" required><br><br>
+        <label for="TaskColor">Task Color:</label><br>
+        <input type="color" id="TaskColor" name="TaskColor" value="#00ff00" required><br><br>
+    </form> 
+    <button id="AddTask">Add Task</button>
+    <button id="DeleteTask">Delete Task</button>
+    <button id="ShowTasks">Show Tasks</button>
+    <p>1. To see your task, first add it, then hit the show button</p>
+    <p>2. To to delete a task, write the name and type of the task to delete, then hit the delete button</p>
+    <p>2. To see any action, refresh the list, hit the show button</p>
+    <h3>Tasks</h3>
+    <ul id="TasksList">
+    </ul>
     <script type="module" src="index.js"></script>
 </body>
 </html>
