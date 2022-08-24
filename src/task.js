@@ -35,6 +35,9 @@ class Task {
         const taskInfo = `Task Name: ${this._taskName}; Task Type: ${this._taskType}`
         return taskInfo
     }
+    get name(){
+        return this._taskName;
+    }
 }
 
 export {Task, taskTypesAdd, getTypeTask, allTasks, deleteTaskFromAllTasks};

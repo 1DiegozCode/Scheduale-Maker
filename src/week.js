@@ -20,6 +20,34 @@ class Week {
     get weekTasks() {
         return Object.keys(this).reduce((weekTaskesArray, weekDay) => weekTaskesArray.concat(this[weekDay].todayTasks), [])
     }
+
+    get monday(){
+        return this._monday
+    }
+
+    get tuesday(){
+        return this._tuesday
+    }
+
+    get wednesday(){
+        return this._wednesday
+    }
+
+    get thursday(){
+        return this._thursday
+    }
+
+    get friday(){
+        return this._friday
+    }
+
+    get saturday() {
+        return this._saturday
+    }
+
+    get sunday() {
+        return this._sunday
+    }
 }
 
 export {Week};

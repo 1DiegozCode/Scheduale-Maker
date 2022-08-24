@@ -1,38 +1,40 @@
-import { HoursBlocks } from "./src/hours_blocks.js";
-import { Day } from "./src/day.js";
 import { Week } from "./src/week.js"; 
-import { Task, taskTypesAdd, getTypeTask, allTasks, deleteTaskFromAllTasks} from "./src/task.js"; 
+import { Task, allTasks} from "./src/task.js"; 
+import { renderWeekBlock } from "./src/render.js";
 
-
+/*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/ 
 let newTaskForm = document.forms['NewTaskForm']
-let tasksList = document.getElementById('TasksList')
+const userWeek = new Week("7:00", "17:00")
+console.log(userWeek)
 
 function addTask() {
     let taskName = document.getElementById("TaskName").value;
     let taskType = document.getElementById("TaskType").value;
     let taskColor = document.getElementById("TaskColor").value;
-    new Task(taskName, taskType, taskColor)
+    let taskTime = document.getElementById("TaskTime").value;
+    let taskInitTime = taskTime.split("-")[0];
+    let taskEndTime = taskTime.split("-")[1];
+    let taskDay = document.getElementById("TaskDay").value;
+    let userTask = new Task(taskName, taskType, taskColor)
+    userWeek.scheduleTask(taskDay, userTask, taskInitTime, taskEndTime)
+    renderWeekBlock(userWeek)
     newTaskForm.reset();
+    storeScheduale(userWeek)
 }
 
-function deleteTask() {
-    let taskName = document.getElementById("TaskName").value;
-    let taskType = document.getElementById("TaskType").value;
-    let taskColor = document.getElementById("TaskColor").value;
-    let newTask = new Task(taskName, taskType, taskColor)
-    deleteTaskFromAllTasks(newTask)
+function clearTasks() { 
+    let taskTime = document.getElementById("TaskTime").value;
+    let taskInitTime = taskTime.split("-")[0];
+    let taskEndTime = taskTime.split("-")[1];
+    let taskDay = document.getElementById("TaskDay").value.toLowerCase();
+    userWeek[taskDay].clearTodayHoursBlock(taskInitTime, taskEndTime)
+    renderWeekBlock(userWeek)
     newTaskForm.reset();
+    storeScheduale(userWeek)
 }
 
-function showTasks() {
-    tasksList.innerHTML = ""
-    for (const task of allTasks) {
-        const taskLi = document.createElement("li");
-        taskLi.innerHTML = task
-        tasksList.appendChild(taskLi);
-    }
-}
+
+
 document.getElementById("AddTask").addEventListener("click", addTask)
-document.getElementById("DeleteTask").addEventListener("click", deleteTask)
-document.getElementById("ShowTasks").addEventListener("click", showTasks)
+document.getElementById("ClearTask").addEventListener("click", clearTasks)
 console.log(allTasks)

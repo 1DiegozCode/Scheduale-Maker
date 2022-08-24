@@ -8,25 +8,258 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Scheduale Maker</title>
 </head>
-    <h1>Easy Scheduale Maker for Time Boxing</h1>
-    <h2>Add Your Tasks</h2>
-    <form id="NewTaskForm" name="NewTaskForm">
-        <label for="TaskName">Task Name:</label><br>
-        <input type="text" id="TaskName" name="TaskName" placeholder="ADS and Algorithms" required><br>
-        <label for="TaskType">Task Type:</label><br>
-        <input type="text" id="TaskType" name="TaskType" placeholder="Computer Science" required><br><br>
-        <label for="TaskColor">Task Color:</label><br>
-        <input type="color" id="TaskColor" name="TaskColor" value="#00ff00" required><br><br>
-    </form> 
-    <button id="AddTask">Add Task</button>
-    <button id="DeleteTask">Delete Task</button>
-    <button id="ShowTasks">Show Tasks</button>
-    <p>1. To see your task, first add it, then hit the show button</p>
-    <p>2. To to delete a task, write the name and type of the task to delete, then hit the delete button</p>
-    <p>2. To see any action, refresh the list, hit the show button</p>
-    <h3>Tasks</h3>
-    <ul id="TasksList">
-    </ul>
+    <header>
+        <h1 class="text-center p-3 fs-1" id="Title">Easy Scheduale Maker for Time Boxing</h1>
+    </header>
+    <section class="d-flex flex-column">
+        <div class="row text-center d-flex">
+        <h2>Add Your Tasks</h2>
+        <form id="NewTaskForm" name="NewTaskForm">
+            <label for="TaskName">Task Name:</label><br>
+            <input type="text" id="TaskName" name="TaskName" placeholder="ADS and Algorithms" required><br>
+            <label for="TaskType">Task Type:</label><br>
+            <input type="text" id="TaskType" name="TaskType" placeholder="Computer Science" required><br>
+            <label for="TaskTime">Time:</label><br>
+            <input type="text" id="TaskTime" name="TaskType" placeholder="ex: 11:00-13:30" required><br>
+            <label for="select">Day:</label><br>
+            <select class="form-select text-center mx-auto" id="TaskDay">
+                <option selected value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <label for="TaskColor">Task Color:</label><br>
+            <input type="color" id="TaskColor" name="TaskColor" value="#00ff00" required><br><br>
+        </form> 
+        </div>
+    </section>
+    <div class="d-flex justify-content-evenly m-3">
+        <button id="AddTask">Add Task</button>
+        <button id="ClearTask">Clear Tasks</button>
+    </div>
+    <div class="d-flex justify-content-evenly m-3">
+        <p>*Clear Task, take the time and day you select and clear all tasks in the range</p>
+    </div>
+    
+    <table class="table table-striped table-hover table-sm align-middle text-center" id="SheduleTable">
+        <thead class="table-secondary">
+            <tr>
+                <th>HOUR</th>
+                <th>MONDAY</th>
+                <th>TUESDAY</th>
+                <th>WEDNESDAY</th>
+                <th>THURSDAY</th>
+                <th>FRIDAY</th>
+                <th>SATURDAY</th>
+                <th>SUNDAY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="table-secondary">7:00-7:30</td>
+                <td id="MONDAY_7:00-7:30"></td>
+                <td id="TUESDAY_7:00-7:30"></td>
+                <td id="WEDNESDAY_7:00-7:30"></td>
+                <td id="THURSDAY_7:00-7:30"></td>
+                <td id="FRIDAY_7:00-7:30"></td>
+                <td id="SATURDAY_7:00-7:30"></td>
+                <td id="SUNDAY_7:00-7:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">7:30-8:00</td>
+                <td id="MONDAY_7:30-8:00"></td>
+                <td id="TUESDAY_7:30-8:00"></td>
+                <td id="WEDNESDAY_7:30-8:00"></td>
+                <td id="THURSDAY_7:30-8:00"></td>
+                <td id="FRIDAY_7:30-8:00"></td>
+                <td id="SATURDAY_7:30-8:00"></td>
+                <td id="SUNDAY_7:30-8:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">8:00-8:30</td>
+                <td id="MONDAY_8:00-8:30"></td>
+                <td id="TUESDAY_8:00-8:30"></td>
+                <td id="WEDNESDAY_8:00-8:30"></td>
+                <td id="THURSDAY_8:00-8:30"></td>
+                <td id="FRIDAY_8:00-8:30"></td>
+                <td id="SATURDAY_8:00-8:30"></td>
+                <td id="SUNDAY_8:00-8:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">8:30-9:00</td>
+                <td id="MONDAY_8:30-9:00"></td>
+                <td id="TUESDAY_8:30-9:00"></td>
+                <td id="WEDNESDAY_8:30-9:00"></td>
+                <td id="THURSDAY_8:30-9:00"></td>
+                <td id="FRIDAY_8:30-9:00"></td>
+                <td id="SATURDAY_8:30-9:00"></td>
+                <td id="SUNDAY_8:30-9:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">9:00-9:30</td>
+                <td id="MONDAY_9:00-9:30"></td>
+                <td id="TUESDAY_9:00-9:30"></td>
+                <td id="WEDNESDAY_9:00-9:30"></td>
+                <td id="THURSDAY_9:00-9:30"></td>
+                <td id="FRIDAY_9:00-9:30"></td>
+                <td id="SATURDAY_9:00-9:30"></td>
+                <td id="SUNDAY_9:00-9:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">9:30-10:00</td>
+                <td id="MONDAY_9:30-10:00"></td>
+                <td id="TUESDAY_9:30-10:00"></td>
+                <td id="WEDNESDAY_9:30-10:00"></td>
+                <td id="THURSDAY_9:30-10:00"></td>
+                <td id="FRIDAY_9:30-10:00"></td>
+                <td id="SATURDAY_9:30-10:00"></td>
+                <td id="SUNDAY_9:30-10:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">10:00-10:30</td>
+                <td id="MONDAY_10:00-10:30"></td>
+                <td id="TUESDAY_10:00-10:30"></td>
+                <td id="WEDNESDAY_10:00-10:30"></td>
+                <td id="THURSDAY_10:00-10:30"></td>
+                <td id="FRIDAY_10:00-10:30"></td>
+                <td id="SATURDAY_10:00-10:30"></td>
+                <td id="SUNDAY_10:00-10:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">10:30-11:00</td>
+                <td id="MONDAY_10:30-11:00"></td>
+                <td id="TUESDAY_10:30-11:00"></td>
+                <td id="WEDNESDAY_10:30-11:00"></td>
+                <td id="THURSDAY_10:30-11:00"></td>
+                <td id="FRIDAY_10:30-11:00"></td>
+                <td id="SATURDAY_10:30-11:00"></td>
+                <td id="SUNDAY_10:30-11:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">11:00-11:30</td>
+                <td id="MONDAY_11:00-11:30"></td>
+                <td id="TUESDAY_11:00-11:30"></td>
+                <td id="WEDNESDAY_11:00-11:30"></td>
+                <td id="THURSDAY_11:00-11:30"></td>
+                <td id="FRIDAY_11:00-11:30"></td>
+                <td id="SATURDAY_11:00-11:30"></td>
+                <td id="SUNDAY_11:00-11:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">11:30-12:00</td>
+                <td id="MONDAY_11:30-12:00"></td>
+                <td id="TUESDAY_11:30-12:00"></td>
+                <td id="WEDNESDAY_11:30-12:00"></td>
+                <td id="THURSDAY_11:30-12:00"></td>
+                <td id="FRIDAY_11:30-12:00"></td>
+                <td id="SATURDAY_11:30-12:00"></td>
+                <td id="SUNDAY_11:30-12:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">12:00-12:30</td>
+                <td id="MONDAY_12:00-12:30"></td>
+                <td id="TUESDAY_12:00-12:30"></td>
+                <td id="WEDNESDAY_12:00-12:30"></td>
+                <td id="THURSDAY_12:00-12:30"></td>
+                <td id="FRIDAY_12:00-12:30"></td>
+                <td id="SATURDAY_12:00-12:30"></td>
+                <td id="SUNDAY_12:00-12:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">12:30-13:00</td>
+                <td id="MONDAY_12:30-13:00"></td>
+                <td id="TUESDAY_12:30-13:00"></td>
+                <td id="WEDNESDAY_12:30-13:00"></td>
+                <td id="THURSDAY_12:30-13:00"></td>
+                <td id="FRIDAY_12:30-13:00"></td>
+                <td id="SATURDAY_12:30-13:00"></td>
+                <td id="SUNDAY_12:30-13:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">13:00-13:30</td>
+                <td id="MONDAY_13:00-13:30"></td>
+                <td id="TUESDAY_13:00-13:30"></td>
+                <td id="WEDNESDAY_13:00-13:30"></td>
+                <td id="THURSDAY_13:00-13:30"></td>
+                <td id="FRIDAY_13:00-13:30"></td>
+                <td id="SATURDAY_13:00-13:30"></td>
+                <td id="SUNDAY_13:00-13:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">13:30-14:00</td>
+                <td id="MONDAY_13:30-14:00"></td>
+                <td id="TUESDAY_13:30-14:00"></td>
+                <td id="WEDNESDAY_13:30-14:00"></td>
+                <td id="THURSDAY_13:30-14:00"></td>
+                <td id="FRIDAY_13:30-14:00"></td>
+                <td id="SATURDAY_13:30-14:00"></td>
+                <td id="SUNDAY_13:30-14:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">14:00-14:30</td>
+                <td id="MONDAY_14:00-14:30"></td>
+                <td id="TUESDAY_14:00-14:30"></td>
+                <td id="WEDNESDAY_14:00-14:30"></td>
+                <td id="THURSDAY_14:00-14:30"></td>
+                <td id="FRIDAY_14:00-14:30"></td>
+                <td id="SATURDAY_14:00-14:30"></td>
+                <td id="SUNDAY_14:00-14:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">14:30-15:00</td>
+                <td id="MONDAY_14:30-15:00"></td>
+                <td id="TUESDAY_14:30-15:00"></td>
+                <td id="WEDNESDAY_14:30-15:00"></td>
+                <td id="THURSDAY_14:30-15:00"></td>
+                <td id="FRIDAY_14:30-15:00"></td>
+                <td id="SATURDAY_14:30-15:00"></td>
+                <td id="SUNDAY_14:30-15:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">15:00-15:30</td>
+                <td id="MONDAY_15:00-15:30"></td>
+                <td id="TUESDAY_15:00-15:30"></td>
+                <td id="WEDNESDAY_15:00-15:30"></td>
+                <td id="THURSDAY_15:00-15:30"></td>
+                <td id="FRIDAY_15:00-15:30"></td>
+                <td id="SATURDAY_15:00-15:30"></td>
+                <td id="SUNDAY_15:00-15:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">15:30-16:00</td>
+                <td id="MONDAY_15:30-16:00"></td>
+                <td id="TUESDAY_15:30-16:00"></td>
+                <td id="WEDNESDAY_15:30-16:00"></td>
+                <td id="THURSDAY_15:30-16:00"></td>
+                <td id="FRIDAY_15:30-16:00"></td>
+                <td id="SATURDAY_15:30-16:00"></td>
+                <td id="SUNDAY_15:30-16:00"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">16:00-16:30</td>
+                <td id="MONDAY_16:00-16:30"></td>
+                <td id="TUESDAY_16:00-16:30"></td>
+                <td id="WEDNESDAY_16:00-16:30"></td>
+                <td id="THURSDAY_16:00-16:30"></td>
+                <td id="FRIDAY_16:00-16:30"></td>
+                <td id="SATURDAY_16:00-16:30"></td>
+                <td id="SUNDAY_16:00-16:30"></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">16:30-17:00</td>
+                <td id="MONDAY_16:30-17:00"></td>
+                <td id="TUESDAY_16:30-17:00"></td>
+                <td id="WEDNESDAY_16:30-17:00"></td>
+                <td id="THURSDAY_16:30-17:00"></td>
+                <td id="FRIDAY_16:30-17:00"></td>
+                <td id="SATURDAY_16:30-17:00"></td>
+                <td id="SUNDAY_16:30-17:00"></td>
+            </tr>
+        </tbody>
+    </table>
     <script type="module" src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

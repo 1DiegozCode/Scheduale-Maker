@@ -51,6 +51,11 @@ class HoursBlocks {
         }
         return resultMessage;
     }
+
+    clearHourBlocks(startingTime, endingTime) {
+        const duration = createHourArray(startingTime, endingTime);
+        duration.map(block => this[block] = "")
+    }
 }
 
 export {HoursBlocks};
