@@ -1,8 +1,12 @@
 import { Week } from "./src/week.js"; 
 import { Task, allTasks} from "./src/task.js"; 
-import { renderWeekBlock } from "./src/render.js";
+import { renderWeekBlock, renderAllTask } from "./src/render.js";
 
-/*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/ 
+/*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/
+recoverTasks()
+renderAllTask()
+
+
 let newTaskForm = document.forms['NewTaskForm']
 const userWeek = new Week("7:00", "17:00")
 console.log(userWeek)
@@ -16,10 +20,12 @@ function addTask() {
     let taskEndTime = taskTime.split("-")[1];
     let taskDay = document.getElementById("TaskDay").value;
     let userTask = new Task(taskName, taskType, taskColor)
+
     userWeek.scheduleTask(taskDay, userTask, taskInitTime, taskEndTime)
     renderWeekBlock(userWeek)
     newTaskForm.reset();
-    storeScheduale(userWeek)
+    saveTasks() 
+    renderAllTask();
 }
 
 function clearTasks() { 
@@ -30,11 +36,27 @@ function clearTasks() {
     userWeek[taskDay].clearTodayHoursBlock(taskInitTime, taskEndTime)
     renderWeekBlock(userWeek)
     newTaskForm.reset();
-    storeScheduale(userWeek)
 }
 
+function saveTasks() {
+    const taskList = [...allTasks]
+    const taskListJSON = JSON.stringify(taskList)
+    localStorage.setItem('lastTaskList', taskListJSON);
+}
 
+function recoverTasks() {
+    const lastTaskList = JSON.parse(localStorage.getItem('lastTaskList')) ? JSON.parse(localStorage.getItem('lastTaskList')) : []
+    lastTaskList.forEach(task => allTasks.add(task))
+}
+
+function clearAllTask() { 
+    allTasks.clear()
+    saveTasks()
+    renderAllTask()
+}
 
 document.getElementById("AddTask").addEventListener("click", addTask)
 document.getElementById("ClearTask").addEventListener("click", clearTasks)
+document.getElementById("ClearTaskList").addEventListener("click", clearAllTask)
 console.log(allTasks)
+console.log()

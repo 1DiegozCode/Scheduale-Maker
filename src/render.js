@@ -1,3 +1,5 @@
+import { allTasks } from "./task.js"; 
+
 function renderHourBlock(hourBlocks, hourBlock, dayName){
     const dayNameUpperCase = dayName.toUpperCase() 
     const idSelector = `${dayNameUpperCase}_${hourBlock}`
@@ -17,4 +19,15 @@ function renderWeekBlock(week) {
         renderDayBlock(week[day])
     }
 }
-export { renderWeekBlock, renderDayBlock }
+
+function renderAllTask() {
+    const tasksListUl = document.getElementById("TaskList")
+    tasksListUl.innerHTML = ""
+    for (const task of allTasks) {
+        const taskLi = document.createElement("li");
+        taskLi.innerHTML = task;
+        tasksListUl.appendChild(taskLi);
+    }
+}
+
+export { renderWeekBlock, renderDayBlock, renderAllTask }
