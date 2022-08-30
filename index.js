@@ -11,6 +11,21 @@ let newTaskForm = document.forms['NewTaskForm']
 const userWeek = new Week("7:00", "17:00")
 console.log(userWeek)
 
+function notifyTask(taskName, taskDay, taskInitTime, taskEndTime){
+    const message = `Task '${taskName}' has been added,
+    on ${taskDay}, from ${taskInitTime} to ${taskEndTime}.`
+    Toastify({
+        text: message,
+        duration: 1500,
+        gravity: "top", 
+        stopOnFocus: true, 
+        style: {
+            background: "whitesmoke",
+            color: "black",
+        }
+    }).showToast();
+}
+
 function addTask() {
     let taskName = document.getElementById("TaskName").value;
     let taskType = document.getElementById("TaskType").value;
@@ -26,6 +41,7 @@ function addTask() {
     newTaskForm.reset();
     saveTasks() 
     renderAllTask();
+    notifyTask(taskName, taskDay, taskInitTime, taskEndTime)
 }
 
 function clearTasks() { 
@@ -54,6 +70,8 @@ function clearAllTask() {
     saveTasks()
     renderAllTask()
 }
+
+
 
 document.getElementById("AddTask").addEventListener("click", addTask)
 document.getElementById("ClearTask").addEventListener("click", clearTasks)
