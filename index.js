@@ -3,8 +3,20 @@ import { Task, allTasks} from "./src/task.js";
 import { renderWeekBlock, renderAllTask } from "./src/render.js";
 
 /*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/
+loaderImit()
 recoverTasks()
 renderAllTask()
+
+
+function loaderImit() { 
+    window.scrollTo(0, 0);
+    setTimeout(()=> {
+        const loader = document.getElementById("Loader")
+        const body = document.getElementsByTagName('body')[0]
+        loader.remove();
+        body.style.overflowY= "scroll"
+    }, 1000)}
+
 
 
 let newTaskForm = document.forms['NewTaskForm']
@@ -71,7 +83,18 @@ function clearAllTask() {
     renderAllTask()
 }
 
-
+const requestInformation = fetch("./info.json")
+                            .then((response) => response.json())
+                            .then((json) => {
+                                const {author, acknowledgments, purpose, version} = json
+                                const credits = document.getElementById("Information")
+                                credits.innerHTML = `<p>
+                                    Author: ${author}<br>
+                                    Acknowledgments: ${acknowledgments}<br>
+                                    Purpose: ${purpose}<br>
+                                    Version: ${version}<br>
+                                </p>` 
+                            })
 
 document.getElementById("AddTask").addEventListener("click", addTask)
 document.getElementById("ClearTask").addEventListener("click", clearTasks)
