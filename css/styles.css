@@ -94,5 +94,8 @@ select {
     height: 0%;
   }
 }
+td:hover {
+  background-color: rgba(184, 184, 184, 0.445);
+}
 
 /*# sourceMappingURL=styles.css.map */
