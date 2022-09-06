@@ -58,4 +58,4 @@ class HoursBlocks {
     }
 }
 
-export {HoursBlocks};
+export { HoursBlocks , createHourArray};

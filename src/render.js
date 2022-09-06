@@ -26,7 +26,6 @@ function renderHourBlock(hourBlocks, hourBlock, dayName){
     }
     let counterRep = 1;
     while (hourBlocks[hourBlock]?.name === hourBlocks[nextHourBlock]?.name) {
-        console.log("repetido!")
         nextHourBlockCell.style.display = 'none'
 
         nextHourBlockIndex += 1
@@ -62,6 +61,13 @@ function renderAllTask() {
         taskLi.innerHTML = task;
         tasksListUl.appendChild(taskLi);
     }
+}
+
+function restoreHourBlock(hourBlock, dayName) {
+    const dayNameUpperCase = dayName.toUpperCase() 
+    const idSelector = `${dayNameUpperCase}_${hourBlock}`
+    const currentHourBlockCell = document.getElementById(idSelector)
+    currentHourBlockCell.style.all = ''
 }
 
 export { renderWeekBlock, renderDayBlock, renderAllTask }
