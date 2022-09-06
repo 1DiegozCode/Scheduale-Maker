@@ -38,6 +38,9 @@ class Task {
     get name(){
         return this._taskName;
     }
+    get color() {
+        return this._taskColour
+    }
 }
 
 export {Task, taskTypesAdd, getTypeTask, allTasks, deleteTaskFromAllTasks};
