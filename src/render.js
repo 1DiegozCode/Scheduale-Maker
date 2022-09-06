@@ -36,7 +36,6 @@ function renderHourBlock(hourBlocks, hourBlock, dayName){
     }
     currentHourBlockCell.setAttribute('rowspan', counterRep)
     currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock].color
-    currentHourBlockCell.style.border = '1px solid gray'
 }
 
 function renderDayBlock(day) {

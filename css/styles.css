@@ -11,7 +11,6 @@ body {
   font-family: "Montserrat", sans-serif;
   letter-spacing: 1px;
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 ul {
@@ -96,6 +95,17 @@ select {
 }
 td:hover {
   background-color: rgba(184, 184, 184, 0.445);
+}
+
+.add_button {
+  height: 3.125rem;
+  width: auto;
+  margin: 4.375rem;
+  cursor: pointer;
+}
+
+.add_task_modal {
+  background: whitesmoke;
 }
 
 /*# sourceMappingURL=styles.css.map */

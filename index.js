@@ -32,5 +32,8 @@ const requestInformation = fetch("./info.json")
 document.getElementById("AddTask").addEventListener("click", addTask)
 document.getElementById("ClearTask").addEventListener("click", clearTasks)
 document.getElementById("ClearTaskList").addEventListener("click", clearAllTask)
+// Pruebas 
+document.getElementById("AddButton").addEventListener("click", ShowForm)
+
 
 export { userWeek }
