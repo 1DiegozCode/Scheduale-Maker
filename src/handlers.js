@@ -47,4 +47,10 @@ function clearAllTask() {
     renderAllTask()
 }
 
-export { addTask, clearTasks, clearAllTask}
+function updateDate(td) {
+    const [day, time] = td.getAttribute("id").split("_")
+    document.getElementById("TaskTime").value = time
+    document.getElementById("TaskDay").value = day.charAt(0).toUpperCase() + day.toLowerCase().slice(1)
+}
+
+export { addTask, clearTasks, clearAllTask, updateDate }
