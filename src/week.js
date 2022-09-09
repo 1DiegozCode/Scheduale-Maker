@@ -1,4 +1,4 @@
-import {Day} from './day.js';
+import { Day } from './day.js';
 
 
 class Week {
@@ -12,7 +12,7 @@ class Week {
         this._sunday = new Day("SUNDAY", startingTime, endingTime);
     }
 
-    scheduleTask(day, task, startingTime, endingTime) {
+    scheduleTask(task, day, startingTime, endingTime) {
         const daySelector = `_${day.toLowerCase()}`;
         return this[daySelector].addTodayTask(task, startingTime, endingTime)
     }

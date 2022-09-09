@@ -31,15 +31,20 @@ class Task {
         allTasks.add(this.taskInfo)
     }
 
-    get taskInfo() {
-        const taskInfo = `Task Name: ${this._taskName}; Task Type: ${this._taskType}`
-        return taskInfo
-    }
     get name(){
         return this._taskName;
     }
+
+    get type() {
+        return this._taskType
+    }
+
     get color() {
         return this._taskColour
+    }
+
+    get taskInfo() {
+        return `Task Name: ${this.name}; Task Type: ${this.type}`
     }
 }
 

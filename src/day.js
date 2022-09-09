@@ -18,7 +18,7 @@ class Day {
     }
 
     addTodayTask(task, startingTime, endingTime) {
-        return this._hourBlocks.addTask(task, startingTime, endingTime)
+        return this.hourBlocks.addTask(task, startingTime, endingTime)
     }
 
     clearTodayHoursBlock(startingTime, endingTime) {

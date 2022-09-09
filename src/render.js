@@ -1,6 +1,19 @@
 import { allTasks } from "./task.js"; 
+import { updateModalInfo } from "./handlers.js"
 
-function renderHourBlock(hourBlocks, hourBlock, dayName){
+
+function setShowTaskInfo(hourBlockCell, hourBlocks, hourBlock) {
+    hourBlockCell.setAttribute("data-bs-target","#InfoTaskModal")
+    hourBlockCell.addEventListener("click", () => updateModalInfo(hourBlocks, hourBlock))
+}
+
+function restoreTdAddTaskModal(hourBlockCell) {
+    hourBlockCell.removeEventListener("click", updateModalInfo(hourBlockCell))
+    hourBlockCell.setAttribute("data-bs-toggle","modal")
+    hourBlockCell.setAttribute("data-bs-target","#AddTaskModal")
+}
+
+function renderHourBlock(hourBlocks, hourBlock, dayName) { //se debe separar en varias funciones menores
     const listHourBlocks = Object.keys(hourBlocks)
     const hourBlockIndex = listHourBlocks.indexOf(hourBlock)
     let nextHourBlockIndex = hourBlockIndex + 1
@@ -13,19 +26,21 @@ function renderHourBlock(hourBlocks, hourBlock, dayName){
 
     const currentHourBlockCell = document.getElementById(idSelector)
     let nextHourBlockCell = document.getElementById(nextIdSelector)
-
-    currentHourBlockCell.innerHTML = hourBlocks[hourBlock].name ? hourBlocks[hourBlock].name : "";
+    currentHourBlockCell.innerHTML = hourBlocks[hourBlock]?.task?.name ? hourBlocks[hourBlock]?.task?.name : "";
     if (hourBlockIndex === listHourBlocks.length - 1) {
         return
     }
-    if (hourBlocks[hourBlock]?.name === undefined) {
+    if (hourBlocks[hourBlock]?.task?.name === undefined) {
         return
     }
     if (nextHourBlockCell.style.display === "none") {
         return
     }
+    if (currentHourBlockCell.style.display === "none") {
+        return
+    }
     let counterRep = 1;
-    while (hourBlocks[hourBlock]?.name === hourBlocks[nextHourBlock]?.name) {
+    while (hourBlocks[hourBlock]?.task?.name === hourBlocks[nextHourBlock]?.task?.name) {
         nextHourBlockCell.style.display = 'none'
 
         nextHourBlockIndex += 1
@@ -35,7 +50,8 @@ function renderHourBlock(hourBlocks, hourBlock, dayName){
         counterRep += 1
     }
     currentHourBlockCell.setAttribute('rowspan', counterRep)
-    currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock].color
+    currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock]?.task?.color
+    setShowTaskInfo(currentHourBlockCell, hourBlocks, hourBlock)
 }
 
 function renderDayBlock(day) {
@@ -60,13 +76,6 @@ function renderAllTask() {
         taskLi.innerHTML = task;
         tasksListUl.appendChild(taskLi);
     }
-}
-
-function restoreHourBlock(hourBlock, dayName) {
-    const dayNameUpperCase = dayName.toUpperCase() 
-    const idSelector = `${dayNameUpperCase}_${hourBlock}`
-    const currentHourBlockCell = document.getElementById(idSelector)
-    currentHourBlockCell.style.all = ''
 }
 
 export { renderWeekBlock, renderDayBlock, renderAllTask }
