@@ -1,13 +1,14 @@
 import { userWeek } from "../index.js"
 import { notifyTask } from "./notifications.js"
 import { Task, allTasks} from "./task.js"; 
-import { renderWeekBlock, renderAllTask } from "./render.js";
+import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal } from "./render.js";
 import { restoreBlocks } from "./restore.js"
 import { TaskDate } from "./task_date.js"
 import { Date, getInitEndTimeArray } from "./date.js"
 
 
-let taskDateSelectedForDelete = ''
+let taskDateSelectedForDelete = ''// Store a selected taskDate instance to get the info to delete it
+let hourBlockCellSelectedForRestore = ''//Store a selected BlockCell to get the info to delete it
 
 function getTaskFormInfo() {
     const taskName = document.getElementById("TaskName").value;
@@ -49,6 +50,7 @@ function clearTasks() {
     allTasks.delete(taskDateSelectedForDelete.task.taskInfo)
     renderWeekBlock(userWeek)
     renderAllTask()
+    restoreTdAddTaskModal(hourBlockCellSelectedForRestore)
 }
 
 function saveTasks() {
@@ -69,12 +71,13 @@ function updateFormDate(td) {
     document.getElementById("TaskDay").value = day.charAt(0).toUpperCase() + day.toLowerCase().slice(1)
 }
 
-function updateModalInfo(hourBlocks, hourBlock,) {
-    document.getElementById("InfoTaskModalTitle").innerHTML = `${hourBlocks[hourBlock].task.name}`
-    document.getElementById("InfoTaskModalType").innerHTML = `Type: ${hourBlocks[hourBlock].task.type}`
-    document.getElementById("InfoTaskModalDay").innerHTML = `${hourBlocks[hourBlock].date.day}`
-    document.getElementById("InfoTaskModalTime").innerHTML = `From ${hourBlocks[hourBlock].date.initTime} to ${hourBlocks[hourBlock].date.endTime}`
+function updateModalInfo(hourBlockCell ,hourBlocks, hourBlock) {
+    document.getElementById("InfoTaskModalTitle").innerHTML = `${hourBlocks[hourBlock]?.task?.name}`
+    document.getElementById("InfoTaskModalType").innerHTML = `Type: ${hourBlocks[hourBlock]?.task?.type}`
+    document.getElementById("InfoTaskModalDay").innerHTML = `${hourBlocks[hourBlock]?.date?.day}`
+    document.getElementById("InfoTaskModalTime").innerHTML = `From ${hourBlocks[hourBlock]?.date?.initTime} to ${hourBlocks[hourBlock]?.date?.endTime}`
     taskDateSelectedForDelete = hourBlocks[hourBlock]
+    hourBlockCellSelectedForRestore = hourBlockCell
 }
 
 export { addTask, clearTasks, clearAllTask, updateFormDate, updateModalInfo }

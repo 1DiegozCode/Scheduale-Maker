@@ -4,11 +4,11 @@ import { updateModalInfo } from "./handlers.js"
 
 function setShowTaskInfo(hourBlockCell, hourBlocks, hourBlock) {
     hourBlockCell.setAttribute("data-bs-target","#InfoTaskModal")
-    hourBlockCell.addEventListener("click", () => updateModalInfo(hourBlocks, hourBlock))
+    hourBlockCell.addEventListener("click", () => updateModalInfo(hourBlockCell, hourBlocks, hourBlock))
 }
 
 function restoreTdAddTaskModal(hourBlockCell) {
-    hourBlockCell.removeEventListener("click", updateModalInfo(hourBlockCell))
+    hourBlockCell.removeEventListener("click", () => updateModalInfo(hourBlockCell, hourBlocks, hourBlock))
     hourBlockCell.setAttribute("data-bs-toggle","modal")
     hourBlockCell.setAttribute("data-bs-target","#AddTaskModal")
 }
@@ -78,4 +78,4 @@ function renderAllTask() {
     }
 }
 
-export { renderWeekBlock, renderDayBlock, renderAllTask }
+export { renderWeekBlock, renderDayBlock, renderAllTask, restoreTdAddTaskModal }
