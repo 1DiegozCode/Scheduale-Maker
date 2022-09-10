@@ -1,7 +1,6 @@
 import {exactToExact, halfToHalf, exactToHalf, halfToExact} from "./hour_functions.js"
 
 
-
 function splitHourMinute(hourMinute) {
     return hourMinute.split(':')
 }
@@ -23,6 +22,10 @@ function getStartingEndTimeData(startingTime, endingTime) {
 
 function checkStartingEndTime(startingTime, endingTime) {
     const {startingHour, endingHour, startingMinute, endingMinute} = getStartingEndTimeData(startingTime, endingTime)
+    const checkFormat = /^[12][\d]:[30]0$/
+    if (checkFormat.test(startingTime) && checkFormat.test(endingTime)){
+        return false
+    }
     if (startingTime === endingTime) {
         return false
     }
@@ -30,6 +33,9 @@ function checkStartingEndTime(startingTime, endingTime) {
         return false
     }
     if (startingHour === endingHour && startingMinute > endingMinute) {
+        return false
+    }
+    if (startingHour > 23 || endingHour > 23) {
         return false
     }
     return true;
