@@ -14,6 +14,15 @@
     <header>
         <h1 class="text-center p-3 fs-1" id="Title">Easy Scheduale Maker for Time Boxing</h1>
     </header>
+    <section class="d-flex flex-column text-center">
+        <form >
+            <label for="UserTime">Time:</label><br>
+            <input type="text" id="UserTime" name="UserType" placeholder="ex: 7:00-15:30" required><br>
+        </form>
+        <div>
+            <button id="CreateTable" type="button" class="button_stilish">Create!</button>
+        </div>
+    </section>
     <div class="loader-wrapper" id="Loader">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
@@ -96,7 +105,16 @@
     <div>
         <h2 class="text-center">Your Sheduale Week</h2>
     </div>
-    <table class="table table-sm align-middle text-center table-bordered" id="ScheduleTable">
+    <table class="table table-sm align-middle text-center table-bordered" id="UserTable">
+        <thead class="table-secondary">
+            <tr id="UserTable_HeaderTableRow">
+            </tr>
+        </thead>
+        <tbody id="UserTable_Body">
+
+        </tbody>
+    </table>
+    <table class="table table-sm align-middle text-center table-bordered" id="ScheduleTable" hidden="true">
         <thead class="table-secondary">
             <tr>
                 <th>HOUR</th>

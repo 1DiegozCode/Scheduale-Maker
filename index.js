@@ -2,7 +2,7 @@ import { Week } from "./src/week.js";
 import { renderAllTask } from "./src/render.js";
 import { loaderImit } from "./src/loader.js"
 import { allTasks } from "./src/task.js"; 
-import { addTask, clearTasks, clearAllTask, updateFormDate } from "./src/handlers.js"
+import { addTask, clearTasks, clearAllTask, updateFormDate, getUserTimeInfo } from "./src/handlers.js"
 
 /*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/
 // Considerar modulo listeners
@@ -42,7 +42,8 @@ const requestInformation = fetch("./info.json")
 document.getElementById("AddTask").addEventListener("click", addTask)
 document.getElementById("ClearTask").addEventListener("click", clearTasks)
 document.getElementById("ClearTaskList").addEventListener("click", clearAllTask)
+document.getElementById("CreateTable").addEventListener("click", getUserTimeInfo)
 addListenerToTD()
-console.log(allTasks)
+
 
 export { userWeek }

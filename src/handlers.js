@@ -5,10 +5,21 @@ import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal } from "./render.
 import { restoreBlocks } from "./restore.js"
 import { TaskDate } from "./task_date.js"
 import { Date, getInitEndTimeArray } from "./date.js"
+import { createUserTableWeek, createTableHeader, createTableRows, createTableCells } from "./create_table.js";
 
 
 let taskDateSelectedForDelete = ''// Store a selected taskDate instance to get the info to delete it
 let hourBlockCellSelectedForRestore = ''//Store a selected BlockCell to get the info to delete it
+
+function getUserTimeInfo() {
+    const userTime = document.getElementById("UserTime");
+    const userTimeValue = document.getElementById("UserTime").value;
+    userTime.value = '';
+    createUserTableWeek(userTimeValue);
+    createTableHeader();
+    createTableRows();
+    createTableCells();
+}
 
 function getTaskFormInfo() {
     const taskName = document.getElementById("TaskName").value;
@@ -80,4 +91,4 @@ function updateModalInfo(hourBlockCell ,hourBlocks, hourBlock) {
     hourBlockCellSelectedForRestore = hourBlockCell
 }
 
-export { addTask, clearTasks, clearAllTask, updateFormDate, updateModalInfo }
+export { addTask, clearTasks, clearAllTask, updateFormDate, updateModalInfo, getUserTimeInfo }

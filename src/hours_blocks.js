@@ -93,4 +93,4 @@ class HoursBlocks {
     }
 }
 
-export { HoursBlocks , createHourArray};
+export { HoursBlocks , createHourArray, splitHourMinute };
