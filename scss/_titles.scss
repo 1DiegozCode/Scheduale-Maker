@@ -1,0 +1,16 @@
+.main_title{
+    font-size: 3.75rem;
+    font-weight: 600;
+    letter-spacing: 0.625rem;
+    &--subtitle{
+        font-size: 2.8125rem;
+        letter-spacing: 0.1875rem;
+    }
+}
+
+.user_form{
+    font-size: 1.4rem;
+    &--child{
+        margin: 10px;
+    }
+}

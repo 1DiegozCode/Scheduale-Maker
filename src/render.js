@@ -14,44 +14,47 @@ function restoreTdAddTaskModal(hourBlockCell) {
 }
 
 function renderHourBlock(hourBlocks, hourBlock, dayName) { //se debe separar en varias funciones menores
-    const listHourBlocks = Object.keys(hourBlocks)
-    const hourBlockIndex = listHourBlocks.indexOf(hourBlock)
+    const listHourBlocks = Object.keys(hourBlocks);
+    const hourBlockIndex = listHourBlocks.indexOf(hourBlock);
     let nextHourBlockIndex = hourBlockIndex + 1
-    let nextHourBlock = listHourBlocks[nextHourBlockIndex]
+    let nextHourBlock = listHourBlocks[nextHourBlockIndex];
 
-    const dayNameUpperCase = dayName.toUpperCase() 
-    const idSelector = `${dayNameUpperCase}_${hourBlock}`
+    const dayNameUpperCase = dayName.toUpperCase();
+    const idSelector = `${dayNameUpperCase}_${hourBlock}`;
 
-    let nextIdSelector = `${dayNameUpperCase}_${nextHourBlock}`
+    let nextIdSelector = `${dayNameUpperCase}_${nextHourBlock}`;
 
-    const currentHourBlockCell = document.getElementById(idSelector)
-    let nextHourBlockCell = document.getElementById(nextIdSelector)
+    const currentHourBlockCell = document.getElementById(idSelector);
+    let nextHourBlockCell = document.getElementById(nextIdSelector);
     currentHourBlockCell.innerHTML = hourBlocks[hourBlock]?.task?.name ? hourBlocks[hourBlock]?.task?.name : "";
-    if (hourBlockIndex === listHourBlocks.length - 1) {
-        return
+    if (hourBlockIndex === listHourBlocks.length - 1 && currentHourBlockCell.innerHTML !== '') {
+        currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock]?.task?.color;
+        setShowTaskInfo(currentHourBlockCell, hourBlocks, hourBlock);
+        return;
     }
     if (hourBlocks[hourBlock]?.task?.name === undefined) {
-        return
+        return;
     }
     if (nextHourBlockCell.style.display === "none") {
-        return
+        return;
     }
     if (currentHourBlockCell.style.display === "none") {
-        return
+        return;
     }
     let counterRep = 1;
     while (hourBlocks[hourBlock]?.task?.name === hourBlocks[nextHourBlock]?.task?.name) {
         nextHourBlockCell.style.display = 'none'
 
         nextHourBlockIndex += 1
-        nextHourBlock = listHourBlocks[nextHourBlockIndex]
-        nextIdSelector = `${dayNameUpperCase}_${nextHourBlock}`
-        nextHourBlockCell = document.getElementById(nextIdSelector)
-        counterRep += 1
+        nextHourBlock = listHourBlocks[nextHourBlockIndex];
+        nextIdSelector = `${dayNameUpperCase}_${nextHourBlock}`;
+        nextHourBlockCell = document.getElementById(nextIdSelector);
+        counterRep += 1;
     }
-    currentHourBlockCell.setAttribute('rowspan', counterRep)
-    currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock]?.task?.color
-    setShowTaskInfo(currentHourBlockCell, hourBlocks, hourBlock)
+    currentHourBlockCell.setAttribute('rowspan', counterRep);
+    currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock]?.task?.color;
+    setShowTaskInfo(currentHourBlockCell, hourBlocks, hourBlock);
+    console.log(hourBlocks)
 }
 
 function renderDayBlock(day) {

@@ -22,8 +22,8 @@ function getStartingEndTimeData(startingTime, endingTime) {
 
 function checkStartingEndTime(startingTime, endingTime) {
     const {startingHour, endingHour, startingMinute, endingMinute} = getStartingEndTimeData(startingTime, endingTime)
-    const checkFormat = /^[12][\d]:[30]0$/
-    if (checkFormat.test(startingTime) && checkFormat.test(endingTime)){
+    const checkFormat = /^[\d][\d]?:[30]0$/
+    if (!(checkFormat.test(startingTime) && checkFormat.test(endingTime))){
         return false
     }
     if (startingTime === endingTime) {

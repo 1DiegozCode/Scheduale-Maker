@@ -1,18 +1,11 @@
 import { createHourArray } from "./hours_blocks.js";
-import { getInitEndTimeArray } from "./date.js"
-import { Week } from "./week.js";
 
 
-
-function createUserTableWeek(userTime) {
-    const userTable = document.getElementById("UserTable")
-    const [startingTimeArray, endingTimeArray] = getInitEndTimeArray(userTime)
-    const userWeek = new Week(startingTimeArray, endingTimeArray)
-    console.log(userWeek)
-}
-
-function createTableHeader() {
-    const headerInfo = ['HOUR', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+function createTableHeader(addWeekends) {
+    let headerInfo = ['HOUR', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+    if (!addWeekends) {
+        headerInfo = headerInfo.slice(0, 6);
+    }
     const headerTableRow = document.getElementById("UserTable_HeaderTableRow");
     for (const title of headerInfo) {
         const tableHeaderRowData = document.createElement('th');
@@ -21,8 +14,8 @@ function createTableHeader() {
     }
 }
 
-function createTableRows() {
-    const userHourArray = createHourArray('8:00','16:00');
+function createTableRows(initTime, endTime) {
+    const userHourArray = createHourArray(initTime, endTime);
     const userTableBody = document.getElementById('UserTable_Body');
     for (const hour of userHourArray) {
         const tableBodyRow = document.createElement('tr');
@@ -39,9 +32,12 @@ function createHourData(hour) {
     return tableHourData
 }
 
-function createTableCells() {
-    const userDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-    const userHourArray = createHourArray('8:00','16:00');
+function createTableCells(initTime, endTime, addWeekends) {
+    let userDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+    if (!addWeekends) {
+        userDays = userDays.slice(0, 5);
+    }
+    const userHourArray = createHourArray(initTime,endTime);
     for (const hour of userHourArray) {
         const currenDayRow = document.getElementById(hour);
         for (const day of userDays) {
@@ -52,4 +48,4 @@ function createTableCells() {
     }
 }
 
-export { createUserTableWeek, createTableHeader, createTableRows, createTableCells }
+export { createTableHeader, createTableRows, createTableCells }

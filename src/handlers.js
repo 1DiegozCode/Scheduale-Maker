@@ -5,20 +5,56 @@ import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal } from "./render.
 import { restoreBlocks } from "./restore.js"
 import { TaskDate } from "./task_date.js"
 import { Date, getInitEndTimeArray } from "./date.js"
-import { createUserTableWeek, createTableHeader, createTableRows, createTableCells } from "./create_table.js";
+import { createTableHeader, createTableRows, createTableCells } from "./create_table.js";
+import { Week } from "./week.js";
 
 
 let taskDateSelectedForDelete = ''// Store a selected taskDate instance to get the info to delete it
 let hourBlockCellSelectedForRestore = ''//Store a selected BlockCell to get the info to delete it
 
+
+
 function getUserTimeInfo() {
-    const userTime = document.getElementById("UserTime");
+    const userCreationForm = document.getElementById('UserCreationForm');
     const userTimeValue = document.getElementById("UserTime").value;
-    userTime.value = '';
-    createUserTableWeek(userTimeValue);
-    createTableHeader();
-    createTableRows();
-    createTableCells();
+    const userNameValue = document.getElementById("UserName").value;
+    const userAddWeekendValue = document.getElementById("UserAddWeekend").checked;
+    userCreationForm.reset()
+    return {
+        userTimeValue: userTimeValue, 
+        userNameValue: userNameValue,
+        userAddWeekendValue: userAddWeekendValue
+    }
+}
+
+function addListenerToTD() {
+    const scheduleTable = document.getElementById("UserTable")
+    const allCellsArray = Array.prototype.slice.call(scheduleTable.getElementsByTagName("td"))
+    const dateCellsArray = allCellsArray.filter(element => !(element.getAttribute("class") === "table-secondary") )
+    dateCellsArray.forEach(td => td.setAttribute("data-bs-toggle","modal"))
+    dateCellsArray.forEach(td => td.setAttribute("data-bs-target","#AddTaskModal"))
+    dateCellsArray.forEach(td => td.addEventListener("click", () => updateFormDate(td)))
+}
+
+function handleCreateTable(resolve) {
+    const {userTimeValue, userNameValue, userAddWeekendValue} = getUserTimeInfo();
+    const [initUserTime, endUserTime] = getInitEndTimeArray(userTimeValue);
+    const newUserWeek = new Week(initUserTime, endUserTime, userAddWeekendValue);
+    createTableHeader(userAddWeekendValue);
+    createTableRows(initUserTime, endUserTime);
+    createTableCells(initUserTime, endUserTime, userAddWeekendValue);
+    adjustSelectionDayOptions(userAddWeekendValue);
+    addListenerToTD();
+    document.getElementById('UserTableName').innerHTML = userNameValue;
+    resolve(newUserWeek);
+}
+
+function adjustSelectionDayOptions(addWeekend) {
+    if (!addWeekend) {
+        const selectionTaskDay = document.getElementById('TaskDay');
+        selectionTaskDay.remove(6);
+        selectionTaskDay.remove(5);
+    }
 }
 
 function getTaskFormInfo() {
@@ -41,27 +77,28 @@ function getTaskFormInfo() {
 }
 
 function addTask() {
-    const {taskName, taskType, taskColor, taskTime, taskInitTime, taskEndTime, taskDay} = getTaskFormInfo()
-    const userTask = new Task(taskName, taskType, taskColor)
-    const userDate = new Date(taskTime, taskDay)
-    const userTaskDate = new TaskDate(userTask, userDate)
+    const {taskName, taskType, taskColor, taskTime, taskInitTime, taskEndTime, taskDay} = getTaskFormInfo();
+    const userTask = new Task(taskName, taskType, taskColor);
+    const userDate = new Date(taskTime, taskDay);
+    const userTaskDate = new TaskDate(userTask, userDate);
     const newTaskForm = document.forms['NewTaskForm']
-    userWeek.scheduleTask(userTaskDate, taskDay,  taskInitTime, taskEndTime)
-    renderWeekBlock(userWeek)
+    console.log(userWeek)
+    userWeek.scheduleTask(userTaskDate, taskDay,  taskInitTime, taskEndTime);
+    renderWeekBlock(userWeek);
     newTaskForm.reset();
-    saveTasks() 
+    saveTasks();
     renderAllTask();
-    notifyTask(taskName, taskDay, taskInitTime, taskEndTime)
+    notifyTask(taskName, taskDay, taskInitTime, taskEndTime);
 }
 
 function clearTasks() {
-    const { date: {initTime, endTime, day}} = taskDateSelectedForDelete
-    userWeek[day.toLowerCase()].clearTodayHoursBlock(initTime, endTime)
-    restoreBlocks(initTime, endTime, day.toLowerCase())
-    allTasks.delete(taskDateSelectedForDelete.task.taskInfo)
-    renderWeekBlock(userWeek)
-    renderAllTask()
-    restoreTdAddTaskModal(hourBlockCellSelectedForRestore)
+    const { date: {initTime, endTime, day}} = taskDateSelectedForDelete;
+    userWeek[day.toLowerCase()].clearTodayHoursBlock(initTime, endTime);
+    restoreBlocks(initTime, endTime, day.toLowerCase());
+    allTasks.delete(taskDateSelectedForDelete.task.taskInfo);
+    renderWeekBlock(userWeek);
+    renderAllTask();
+    restoreTdAddTaskModal(hourBlockCellSelectedForRestore);
 }
 
 function saveTasks() {
@@ -91,4 +128,4 @@ function updateModalInfo(hourBlockCell ,hourBlocks, hourBlock) {
     hourBlockCellSelectedForRestore = hourBlockCell
 }
 
-export { addTask, clearTasks, clearAllTask, updateFormDate, updateModalInfo, getUserTimeInfo }
+export { addTask, clearTasks, clearAllTask, updateFormDate, updateModalInfo, getUserTimeInfo, handleCreateTable }

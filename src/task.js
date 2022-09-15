@@ -1,9 +1,3 @@
-const taskColours = {
-    red: "red",
-    blue: "blue",
-    green: "green"
-}
-
 const taskTypesAdd = {
     work: new Set(),
     study: new Set(),
