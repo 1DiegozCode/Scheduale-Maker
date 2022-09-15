@@ -1,12 +1,13 @@
 import { userWeek } from "../index.js"
 import { notifyTask } from "./notifications.js"
 import { Task, allTasks} from "./task.js"; 
-import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal } from "./render.js";
+import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal, hideCreationForm, hideMainTitle } from "./render.js";
 import { restoreBlocks } from "./restore.js"
 import { TaskDate } from "./task_date.js"
 import { Date, getInitEndTimeArray } from "./date.js"
 import { createTableHeader, createTableRows, createTableCells } from "./create_table.js";
 import { Week } from "./week.js";
+import { loaderImit } from "./loader.js";
 
 
 let taskDateSelectedForDelete = ''// Store a selected taskDate instance to get the info to delete it
@@ -46,6 +47,9 @@ function handleCreateTable(resolve) {
     adjustSelectionDayOptions(userAddWeekendValue);
     addListenerToTD();
     document.getElementById('UserTableName').innerHTML = userNameValue;
+    hideMainTitle();
+    hideCreationForm();
+    loaderImit();
     resolve(newUserWeek);
 }
 
@@ -82,7 +86,6 @@ function addTask() {
     const userDate = new Date(taskTime, taskDay);
     const userTaskDate = new TaskDate(userTask, userDate);
     const newTaskForm = document.forms['NewTaskForm']
-    console.log(userWeek)
     userWeek.scheduleTask(userTaskDate, taskDay,  taskInitTime, taskEndTime);
     renderWeekBlock(userWeek);
     newTaskForm.reset();

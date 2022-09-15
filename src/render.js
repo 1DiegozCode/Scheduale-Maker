@@ -7,6 +7,14 @@ function setShowTaskInfo(hourBlockCell, hourBlocks, hourBlock) {
     hourBlockCell.addEventListener("click", () => updateModalInfo(hourBlockCell, hourBlocks, hourBlock))
 }
 
+function hideCreationForm() {
+    document.getElementById("UserCreationForm").setAttribute("hidden", "true");
+}
+
+function hideMainTitle() {
+    document.getElementById("MainTitle").setAttribute("hidden", "true");
+}
+
 function restoreTdAddTaskModal(hourBlockCell) {
     hourBlockCell.removeEventListener("click", () => updateModalInfo(hourBlockCell, hourBlocks, hourBlock))
     hourBlockCell.setAttribute("data-bs-toggle","modal")
@@ -54,7 +62,6 @@ function renderHourBlock(hourBlocks, hourBlock, dayName) { //se debe separar en 
     currentHourBlockCell.setAttribute('rowspan', counterRep);
     currentHourBlockCell.style.backgroundColor = hourBlocks[hourBlock]?.task?.color;
     setShowTaskInfo(currentHourBlockCell, hourBlocks, hourBlock);
-    console.log(hourBlocks)
 }
 
 function renderDayBlock(day) {
@@ -81,4 +88,4 @@ function renderAllTask() {
     }
 }
 
-export { renderWeekBlock, renderDayBlock, renderAllTask, restoreTdAddTaskModal }
+export { renderWeekBlock, renderDayBlock, renderAllTask, restoreTdAddTaskModal, hideCreationForm, hideMainTitle }

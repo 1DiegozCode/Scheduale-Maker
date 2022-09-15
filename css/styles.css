@@ -9,6 +9,7 @@ html, body {
   font-family: "Montserrat", sans-serif;
   letter-spacing: 1px;
   margin: 0;
+  padding: 0;
 }
 
 ul {
@@ -121,6 +122,12 @@ td:hover {
 }
 .user_form--child {
   margin: 10px;
+}
+
+.user_table_name {
+  font-size: 3.3rem;
+  font-weight: 600;
+  letter-spacing: 0.625rem;
 }
 
 .table-fixed {

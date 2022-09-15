@@ -6,14 +6,11 @@ import { addTask, clearTasks, clearAllTask, updateFormDate, handleCreateTable } 
 /*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/
 // Considerar modulo listeners
 
-/*Ya se pueden crear tablas de horario de manera dinamica, y son completamente interactivas con el
-usuario. Hay que modificar el flujo de trabajo para que el usuario cree la tabla segun el rango que 
-necesite y los días de la semana que requiera. Verificar que añadir tareas reciba solamnte horas 
-que tienen sentido usar. No se ha eliminado todavia la tabla original. Hay que agregar el modal 
+/*Arrojar error si el usuario trata de añadir horarios fuera de la tabla creada
+. No se ha eliminado todavia la tabla original. Hay que agregar el modal 
 de notificación que explica como funciona la aplicacion, luego de que la tabla se haya generado 
-satisfactoriamente a manera de notificacion, tambien se debe ordenar create table, y el usuario
-debe poder nombrar su tabla com quiera. agregar una lista de colores predeterminada a la selección */
-
+satisfactoriamente a manera de notificacion, tambien se debe ordenar create table
+. agregar una lista de colores predeterminada a la selección */
 /*Usar un regex y replace para limpiar las cadenas de entrada de las horas*/ 
 loaderImit()
 recoverTasks()
