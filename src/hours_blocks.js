@@ -80,9 +80,10 @@ class HoursBlocks {
         let resultMessage = "";
         if (duration.every(block => this[block] === "")) {
             duration.map(block => this[block] = task);
-            resultMessage = "Task has been add correctly";
+            resultMessage = "Succeed";
         } else {
-            resultMessage = "Error: The starting hour or the ending hour not match with the hours block || An existing task is already schedule";
+            console.error("Error: The starting hour or the ending hour not match with the hours block || An existing task is already schedule")
+            resultMessage = "Failed";
         }
         return resultMessage;
     }

@@ -3,7 +3,7 @@ function notifyTask(taskName, taskDay, taskInitTime, taskEndTime){
     on ${taskDay}, from ${taskInitTime} to ${taskEndTime}.`
     Toastify({
         text: message,
-        duration: 1500,
+        duration: 3500,
         gravity: "top", 
         stopOnFocus: true, 
         style: {
@@ -13,4 +13,24 @@ function notifyTask(taskName, taskDay, taskInitTime, taskEndTime){
     }).showToast();
 }
 
-export { notifyTask }
+function notifyTaskError(){
+    const message = `Invalid input!
+    Check if the time is correct
+    or a task is scheduled in the time
+    range.`
+    Toastify({
+        text: message,
+        duration: 5000,
+        close: true,
+        gravity: "top", 
+        position: "center",
+        stopOnFocus: true, 
+        style: {
+            background: "red",
+            color: "black",
+            'text-align': "center"
+        }
+    }).showToast();
+}
+
+export { notifyTask, notifyTaskError }

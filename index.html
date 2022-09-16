@@ -19,15 +19,17 @@
         <form class="user_form" id="UserCreationForm">
             <div class="user_form--child">
                 <label for="UserName">Name of your Schedule:</label><br>
-                <input type="text" id="UserName" name="UserName" placeholder="ex: Timeboxing" required><br>
+                <input type="text" id="UserName" name="UserName" placeholder="ex; Timeboxing" required><br>
             </div>
             <div class="user_form--child">
             <label for="UserTime">Time Range:</label><br>
-            <input type="text" id="UserTime" name="UserTime" placeholder="ex: 7:00-15:30" required><br>
+            <input type="text" id="UserTime" name="UserTime" placeholder="ex; 7:00-15:30" required><br>
             </div>
             <label><input type="checkbox" id="UserAddWeekend">Include Weekend</label><br>
-            
-            <button id="CreateTable" type="button" class="button_stilish m-5">Create!</button>
+            <button id="CreateTable" type="button" class="button_stilish m-4">Create!</button>
+            <p class="fs-6">*Use 24 hour format.<br>
+                *If you are in a mobile device, rotate your phone.
+            </p>
         </form>
     </section>
     <div class="loader-wrapper" id="Loader">
@@ -38,7 +40,7 @@
         <img src="./assets/plus-svgrepo-com.svg" alt="add task" class="add_button position-fixed bottom-0 end-0">
     </div>
 
-    <div class="modal fade" id="AddTaskModal" tabindex="-1" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+    <section class="modal fade" id="AddTaskModal" tabindex="-1" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
         <div class="modal-dialog text text-center">
             <div class="modal-content add_task_modal">
                 <div class="modal-header d-flex justify-content-center">
@@ -54,7 +56,7 @@
                     <label for="TaskType">Task Type:</label><br>
                     <input type="text" id="TaskType" name="TaskType" placeholder="Computer Science" required><br>
                     <label for="TaskTime">Time:</label><br>
-                    <input type="text" id="TaskTime" name="TaskType" placeholder="ex: 11:00-13:30" required><br>
+                    <input type="text" id="TaskTime" name="TaskType" placeholder="ex; 11:00-13:30" required><br>
                     <label for="select">Day:</label><br>
                     <select class="form-select text-center mx-auto fs-5" id="TaskDay">
                         <option selected value="Monday">Monday</option>
@@ -74,9 +76,9 @@
             </div>
             </div>
         </div>
-    </div>
+    </section>
     
-    <div class="modal fade" id="InfoTaskModal" tabindex="-1" aria-labelledby="InfoTaskModalLabel" aria-hidden="true">
+    <section class="modal fade" id="InfoTaskModal" tabindex="-1" aria-labelledby="InfoTaskModalLabel" aria-hidden="true">
         <div class="modal-dialog text text-center">
             <div class="modal-content add_task_modal">
                 <div class="modal-header d-flex justify-content-center">
@@ -96,7 +98,7 @@
             </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <div class="text-center" hidden="true">
         <h2 class="">Last Added Tasks</h2>

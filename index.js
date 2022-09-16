@@ -3,19 +3,19 @@ import { loaderImit } from "./src/loader.js"
 import { allTasks } from "./src/task.js"; 
 import { addTask, clearTasks, clearAllTask, updateFormDate, handleCreateTable } from "./src/handlers.js"
 
-/*Por agregar: Interfaz de tareas por tipos agregadas y su busqueda recursiva en la semana, la tabla html a pdf*/
+
 // Considerar modulo listeners
 
-/*Arrojar error si el usuario trata de añadir horarios fuera de la tabla creada
-. No se ha eliminado todavia la tabla original. Hay que agregar el modal 
-de notificación que explica como funciona la aplicacion, luego de que la tabla se haya generado 
-satisfactoriamente a manera de notificacion, tambien se debe ordenar create table
-. agregar una lista de colores predeterminada a la selección */
-/*Usar un regex y replace para limpiar las cadenas de entrada de las horas*/ 
+/*agregar una lista de colores predeterminada a la selección */
+
 loaderImit()
 recoverTasks()
 renderAllTask()
 
+function recoverTasks() {
+    const lastTaskList = JSON.parse(localStorage.getItem('lastTaskList')) ? JSON.parse(localStorage.getItem('lastTaskList')) : []
+    lastTaskList.forEach(task => allTasks.add(task))
+}
 
 function startWeek() {
     return new Promise((resolve) => {
@@ -24,11 +24,6 @@ function startWeek() {
 }
 
 let userWeek = await startWeek();
-
-function recoverTasks() {
-    const lastTaskList = JSON.parse(localStorage.getItem('lastTaskList')) ? JSON.parse(localStorage.getItem('lastTaskList')) : []
-    lastTaskList.forEach(task => allTasks.add(task))
-}
 
 const requestInformation = fetch("./info.json")
                             .then((response) => response.json())

@@ -1,5 +1,5 @@
 import { userWeek } from "../index.js"
-import { notifyTask } from "./notifications.js"
+import { notifyTask, notifyTaskError } from "./notifications.js"
 import { Task, allTasks} from "./task.js"; 
 import { renderWeekBlock, renderAllTask, restoreTdAddTaskModal, hideCreationForm, hideMainTitle } from "./render.js";
 import { restoreBlocks } from "./restore.js"
@@ -8,6 +8,7 @@ import { Date, getInitEndTimeArray } from "./date.js"
 import { createTableHeader, createTableRows, createTableCells } from "./create_table.js";
 import { Week } from "./week.js";
 import { loaderImit } from "./loader.js";
+import { cleanTimeFormat } from "./clean_inputs.js";
 
 
 let taskDateSelectedForDelete = ''// Store a selected taskDate instance to get the info to delete it
@@ -17,7 +18,7 @@ let hourBlockCellSelectedForRestore = ''//Store a selected BlockCell to get the 
 
 function getUserTimeInfo() {
     const userCreationForm = document.getElementById('UserCreationForm');
-    const userTimeValue = document.getElementById("UserTime").value;
+    const userTimeValue = cleanTimeFormat(document.getElementById("UserTime").value);
     const userNameValue = document.getElementById("UserName").value;
     const userAddWeekendValue = document.getElementById("UserAddWeekend").checked;
     userCreationForm.reset()
@@ -65,7 +66,7 @@ function getTaskFormInfo() {
     const taskName = document.getElementById("TaskName").value;
     const taskType = document.getElementById("TaskType").value;
     const taskColor = document.getElementById("TaskColor").value;
-    const taskTime = document.getElementById("TaskTime").value;
+    const taskTime = cleanTimeFormat(document.getElementById("TaskTime").value);
     const taskInitTime = getInitEndTimeArray(taskTime)[0];
     const taskEndTime = getInitEndTimeArray(taskTime)[1];
     const taskDay = document.getElementById("TaskDay").value;
@@ -86,12 +87,21 @@ function addTask() {
     const userDate = new Date(taskTime, taskDay);
     const userTaskDate = new TaskDate(userTask, userDate);
     const newTaskForm = document.forms['NewTaskForm']
-    userWeek.scheduleTask(userTaskDate, taskDay,  taskInitTime, taskEndTime);
-    renderWeekBlock(userWeek);
-    newTaskForm.reset();
-    saveTasks();
-    renderAllTask();
-    notifyTask(taskName, taskDay, taskInitTime, taskEndTime);
+    const confirmation = userWeek.scheduleTask(userTaskDate, taskDay,  taskInitTime, taskEndTime);
+
+    if(checkAddTaskConfirmation(confirmation)) {
+        renderWeekBlock(userWeek);
+        newTaskForm.reset();
+        saveTasks();
+        renderAllTask();
+        notifyTask(taskName, taskDay, taskInitTime, taskEndTime);
+    } else {
+        notifyTaskError();
+    }
+}
+
+function checkAddTaskConfirmation(confirmation) {
+    return confirmation === 'Succeed';
 }
 
 function clearTasks() {
