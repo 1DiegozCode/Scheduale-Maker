@@ -1,0 +1,96 @@
+
+$colors:(
+        red: #ff6961,
+        blue: #84b6f4,
+        green: #77dd77,
+        pink: #fdcae1,
+        purple: #bc98f3,
+        yellow: #fdfd96,
+        dark-blue: #5086c1,
+        dark-green: #42ab49,
+);
+
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+input[type="radio"]:checked + label {
+    border-color: rgb(85, 85, 85);
+}
+
+.color_picker {
+    display: inline-block;
+    margin: 4px;
+    height: 40px;
+    width: 40px;
+    border: 4px solid #ddd;
+    border-radius: 50px;
+    &--red{
+        @extend .color_picker;
+        background-color: map-get($colors, red);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--blue{
+        @extend .color_picker;
+        background-color: map-get($colors, blue);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--yellow{
+        @extend .color_picker;
+        background-color: map-get($colors, yellow);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--green{
+        @extend .color_picker;
+        background-color: map-get($colors, green);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--pink{
+        @extend .color_picker;
+        background-color: map-get($colors, pink);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--purple{
+        @extend .color_picker;
+        background-color: map-get($colors, purple);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--dark-blue{
+        @extend .color_picker;
+        background-color: map-get($colors, dark-blue);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+    &--dark-green{
+        @extend .color_picker;
+        background-color: map-get($colors, dark-green);
+        &:hover {
+            border-color: rgb(168, 166, 166);
+            cursor: pointer;
+        }
+    }
+}
+
+

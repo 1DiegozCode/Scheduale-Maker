@@ -65,7 +65,7 @@ function adjustSelectionDayOptions(addWeekend) {
 function getTaskFormInfo() {
     const taskName = document.getElementById("TaskName").value;
     const taskType = document.getElementById("TaskType").value;
-    const taskColor = document.getElementById("TaskColor").value;
+    const taskColor = document.querySelector('input[name="color_picker"]:checked').value;
     const taskTime = cleanTimeFormat(document.getElementById("TaskTime").value);
     const taskInitTime = getInitEndTimeArray(taskTime)[0];
     const taskEndTime = getInitEndTimeArray(taskTime)[1];

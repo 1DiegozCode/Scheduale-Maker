@@ -138,4 +138,79 @@ td:hover {
   word-wrap: initial;
 }
 
+input[type=radio] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+input[type=radio]:checked + label {
+  border-color: rgb(85, 85, 85);
+}
+
+.color_picker, .color_picker--dark-green, .color_picker--dark-blue, .color_picker--purple, .color_picker--pink, .color_picker--green, .color_picker--yellow, .color_picker--blue, .color_picker--red {
+  display: inline-block;
+  margin: 4px;
+  height: 40px;
+  width: 40px;
+  border: 4px solid #ddd;
+  border-radius: 50px;
+}
+.color_picker--red {
+  background-color: #ff6961;
+}
+.color_picker--red:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--blue {
+  background-color: #84b6f4;
+}
+.color_picker--blue:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--yellow {
+  background-color: #fdfd96;
+}
+.color_picker--yellow:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--green {
+  background-color: #77dd77;
+}
+.color_picker--green:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--pink {
+  background-color: #fdcae1;
+}
+.color_picker--pink:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--purple {
+  background-color: #bc98f3;
+}
+.color_picker--purple:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--dark-blue {
+  background-color: #5086c1;
+}
+.color_picker--dark-blue:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+.color_picker--dark-green {
+  background-color: #42ab49;
+}
+.color_picker--dark-green:hover {
+  border-color: rgb(168, 166, 166);
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=styles.css.map */
